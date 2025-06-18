@@ -1,5 +1,547 @@
-<html>
-    <body>
-        INDICE
-    </body>
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indice Progetti Grafici</title>
+    <style>
+        /* Import di un font carino da Google Fonts */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+        /* Stili Generali */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f7f6;
+            color: #333;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #007bff, #0056b3);
+            color: #ffffff;
+            padding: 2rem 1rem;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            font-weight: 600;
+        }
+
+        header p {
+            margin: 0.5rem 0 0;
+            font-size: 1.1rem;
+            font-weight: 300;
+        }
+
+        /* Contenuto Principale */
+        main {
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Griglia per i link */
+        .link-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        /* Stile delle "Card" per ogni link */
+        .link-card {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .link-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+        }
+
+        .link-card a {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            padding: 1.5rem;
+        }
+        
+        .link-card h3 {
+            margin-top: 0;
+            margin-bottom: 0.5rem;
+            color: #0056b3;
+            font-size: 1.2rem;
+        }
+
+        .link-card .description {
+            font-size: 0.9rem;
+            color: #666;
+            min-height: 45px; /* Assicura un'altezza minima per l'allineamento */
+            margin-bottom: 1rem;
+        }
+        
+        .link-card .filename {
+            font-family: 'Courier New', Courier, monospace;
+            background-color: #e9ecef;
+            padding: 0.2em 0.5em;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            color: #d63384; /* Un colore che risalta per il codice */
+            word-break: break-all; /* Va a capo se il nome file è lungo */
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            background-color: #343a40;
+            color: #f8f9fa;
+            font-size: 0.9rem;
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Indice dei Progetti Grafici</h1>
+        <p>Esplora i diversi esperimenti e strumenti di elaborazione grafica</p>
+    </header>
+
+    <main>
+        <div class="link-container">
+            <!-- Le card verranno inserite qui dinamicamente o manualmente -->
+            
+            <div class="link-card">
+                <a href="boldini 1.html">
+                    <h3>Stile Boldini 1</h3>
+                    <p class="description">Un primo esperimento per replicare lo stile pittorico di Giovanni Boldini.</p>
+                    <span class="filename">boldini 1.html</span>
+                </a>
+            </div>
+            
+            <div class="link-card">
+                <a href="boldini a svg.html">
+                    <h3>Boldini a SVG</h3>
+                    <p class="description">Conversione di un'immagine in stile Boldini in formato vettoriale SVG.</p>
+                    <span class="filename">boldini a svg.html</span>
+                </a>
+            </div>
+
+            <div class="link-card">
+                <a href="boldini svg 1.html">
+                    <h3>Boldini SVG 1</h3>
+                    <p class="description">Versione vettoriale SVG di un'elaborazione in stile Boldini.</p>
+                    <span class="filename">boldini svg 1.html</span>
+                </a>
+            </div>
+            
+            <div class="link-card">
+                <a href="campo di densita.html">
+                    <h3>Campo di Densità</h3>
+                    <p class="description">Visualizzazione di un campo di densità, utile per effetti come il posizionamento di particelle.</p>
+                    <span class="filename">campo di densita.html</span>
+                </a>
+            </div>
+            
+            <div class="link-card">
+                <a href="carboncino 1.html">
+                    <h3>Effetto Carboncino</h3>
+                    <p class="description">Simulazione di un disegno realizzato a carboncino, con texture e tratti caratteristici.</p>
+                    <span class="filename">carboncino 1.html</span>
+                </a>
+            </div>
+            
+            <div class="link-card">
+                <a href="colora su foto.html">
+                    <h3>Colora su Foto</h3>
+                    <p class="description">Strumento interattivo per applicare colori o effetti su un'immagine esistente.</p>
+                    <span class="filename">colora su foto.html</span>
+                </a>
+            </div>
+
+            <div class="link-card">
+                <a href="copia a matita umano.html">
+                    <h3>Copia a Matita (Umano)</h3>
+                    <p class="description">Algoritmo che tenta di imitare il processo umano di copia di un disegno a matita.</p>
+                    <span class="filename">copia a matita umano.html</span>
+                </a>
+            </div>
+
+            <div class="link-card">
+                <a href="cranklet.html">
+                    <h3>Cranklet</h3>
+                    <p class="description">Tool o esperimento specifico denominato "Cranklet".</p>
+                    <span class="filename">cranklet.html</span>
+                </a>
+            </div>
+
+            <div class="link-card">
+                <a href="crosshatch 2.html">
+                    <h3>Tratteggio Incrociato v2</h3>
+                    <p class="description">Seconda versione dell'algoritmo di tratteggio incrociato (cross-hatching).</p>
+                    <span class="filename">crosshatch 2.html</span>
+                </a>
+            </div>
+
+            <div class="link-card">
+                <a href="crosshatch bn.html">
+                    <h3>Tratteggio Incrociato B/N</h3>
+                    <p class="description">Effetto di tratteggio incrociato applicato a immagini in bianco e nero.</p>
+                    <span class="filename">crosshatch bn.html</span>
+                </a>
+            </div>
+
+            <div class="link-card">
+                <a href="crosshatch bn tremolio.html">
+                    <h3>Tratteggio B/N con Tremolio</h3>
+                    <p class="description">Tratteggio in bianco e nero con un effetto "tremolio" per un aspetto più manuale.</p>
+                    <span class="filename">crosshatch bn tremolio.html</span>
+                </a>
+            </div>
+
+            <div class="link-card">
+                <a href="crosshatch cymk 3.html">
+                    <h3>Tratteggio CMYK v3</h3>
+                    <p class="description">Terza iterazione del tratteggio con simulazione della quadricromia (CMYK).</p>
+                    <span class="filename">crosshatch cymk 3.html</span>
+                </a>
+            </div>
+            
+            <div class="link-card">
+                <a href="crosshatch cymk final.html">
+                    <h3>Tratteggio CMYK Finale</h3>
+                    <p class="description">Versione finale e rifinita dell'effetto di tratteggio incrociato in CMYK.</p>
+                    <span class="filename">crosshatch cymk final.html</span>
+                </a>
+            </div>
+
+            <div class="link-card">
+                <a href="crosshatch cymk.html">
+                    <h3>Tratteggio CMYK</h3>
+                    <p class="description">Implementazione base del tratteggio incrociato con colori CMYK.</p>
+                    <span class="filename">crosshatch cymk.html</span>
+                </a>
+            </div>
+
+            <div class="link-card">
+                <a href="crosshatch cymk tremolio ghirigoro penna.html">
+                    <h3>Tratteggio CMYK Complesso</h3>
+                    <p class="description">Effetto avanzato con tremolio, ghirigori e simulazione di una penna per un realismo maggiore.</p>
+                    <span class="filename">crosshatch cymk tremolio ghirigoro penna.html</span>
+                </a>
+            </div>
+
+            <div class="link-card">
+                <a href="crosshatcher cymk 4.html">
+                    <h3>Crosshatcher CMYK v4</h3>
+                    <p class="description">Quarta versione del generatore di tratteggio in CMYK.</p>
+                    <span class="filename">crosshatcher cymk 4.html</span>
+                </a>
+            </div>
+            
+            <div class="link-card">
+                <a href="crosshatch.html">
+                    <h3>Crosshatch Base</h3>
+                    <p class="description">Pagina principale o versione base dell'effetto di tratteggio incrociato.</p>
+                    <span class="filename">crosshatch.html</span>
+                </a>
+            </div>
+
+            <div class="link-card">
+                <a href="crosshatching cymk ghirigoro.html">
+                    <h3>Tratteggio CMYK con Ghirigoro</h3>
+                    <p class="description">Aggiunge un effetto di "ghirigoro" al tratteggio CMYK per uno stile più artistico.</p>
+                    <span class="filename">crosshatching cymk ghirigoro.html</span>
+                </a>
+            </div>
+            
+            <div class="link-card">
+                <a href="crosshatching cymk tremolio e ghirigoro.html">
+                    <h3>Tratteggio CMYK con Tremolio e Ghirigoro</h3>
+                    <p class="description">Combinazione degli effetti di tremolio e ghirigoro per un risultato più organico.</p>
+                    <span class="filename">crosshatching cymk tremolio e ghirigoro.html</span>
+                </a>
+            </div>
+
+            <div class="link-card">
+                <a href="crosshatch wobbled.html">
+                    <h3>Tratteggio con "Wobble"</h3>
+                    <p class="description">Effetto di tratteggio con una distorsione o oscillazione (wobble) delle linee.</p>
+                    <span class="filename">crosshatch wobbled.html</span>
+                </a>
+            </div>
+
+            <div class="link-card">
+                <a href="floyd cymk 2.html">
+                    <h3>Dithering Floyd CMYK v2</h3>
+                    <p class="description">Seconda versione dell'algoritmo di dithering di Floyd-Steinberg in CMYK.</p>
+                    <span class="filename">floyd cymk 2.html</span>
+                </a>
+            </div>
+
+            <div class="link-card">
+                <a href="floyd cymk.html">
+                    <h3>Dithering Floyd CMYK</h3>
+                    <p class="description">Applicazione dell'algoritmo di dithering di Floyd-Steinberg con canali CMYK.</p>
+                    <span class="filename">floyd cymk.html</span>
+                </a>
+            </div>
+            
+            <div class="link-card">
+                <a href="floyd.html">
+                    <h3>Floyd-Steinberg Dithering</h3>
+                    <p class="description">Implementazione base del classico algoritmo di dithering per la riduzione dei colori.</p>
+                    <span class="filename">floyd.html</span>
+                </a>
+            </div>
+            
+            <div class="link-card">
+                <a href="floyd stippling.html">
+                    <h3>Puntinismo (Stippling) con Floyd</h3>
+                    <p class="description">Creazione di un effetto puntinismo (stippling) usando l'algoritmo di Floyd-Steinberg.</p>
+                    <span class="filename">floyd stippling.html</span>
+                </a>
+            </div>
+
+            <div class="link-card">
+                <a href="hmac.html">
+                    <h3>HMAC</h3>
+                    <p class="description">Pagina relativa a un test o implementazione di HMAC (Hash-based Message Authentication Code).</p>
+                    <span class="filename">hmac.html</span>
+                </a>
+            </div>
+
+            <div class="link-card">
+                <a href="image to svg 1.html">
+                    <h3>Immagine a SVG</h3>
+                    <p class="description">Strumento per la conversione di immagini raster (JPG, PNG) in formato vettoriale SVG.</p>
+                    <span class="filename">image to svg 1.html</span>
+                </a>
+            </div>
+
+            <div class="link-card">
+                <a href="index.html">
+                    <h3>Index</h3>
+                    <p class="description">La pagina principale o un altro indice del progetto (potrebbe essere questa stessa pagina).</p>
+                    <span class="filename">index.html</span>
+                </a>
+            </div>
+
+            <div class="link-card">
+                <a href="linefy 1.html">
+                    <h3>Linefy v1</h3>
+                    <p class="description">Prima versione di un algoritmo che trasforma un'immagine in un disegno composto da linee.</p>
+                    <span class="filename">linefy 1.html</span>
+                </a>
+            </div>
+
+            <div class="link-card">
+                <a href="linefy 2.html">
+                    <h3>Linefy v2</h3>
+                    <p class="description">Versione migliorata dell'algoritmo "Linefy" per la scomposizione in linee.</p>
+                    <span class="filename">linefy 2.html</span>
+                </a>
+            </div>
+
+            <div class="link-card">
+                <a href="linefy colore 1.html">
+                    <h3>Linefy a Colori</h3>
+                    <p class="description">Versione di "Linefy" che preserva o applica informazioni sul colore.</p>
+                    <span class="filename">linefy colore 1.html</span>
+                </a>
+            </div>
+
+            <div class="link-card">
+                <a href="linify 01.html">
+                    <h3>Linify v1</h3>
+                    <p class="description">Prima versione di un algoritmo che trasforma un'immagine in un disegno composto da linee (variante).</p>
+                    <span class="filename">linify 01.html</span>
+                </a>
+            </div>
+
+            <div class="link-card">
+                <a href="linify 02 color.html">
+                    <h3>Linify v2 a Colori</h3>
+                    <p class="description">Seconda versione di "Linify" con supporto per il colore.</p>
+                    <span class="filename">linify 02 color.html</span>
+                </a>
+            </div>
+
+            <div class="link-card">
+                <a href="matita 2.html">
+                    <h3>Effetto Matita v2</h3>
+                    <p class="description">Seconda versione dell'algoritmo che simula un disegno a matita.</p>
+                    <span class="filename">matita 2.html</span>
+                </a>
+            </div>
+
+            <div class="link-card">
+                <a href="matita.html">
+                    <h3>Effetto Matita</h3>
+                    <p class="description">Implementazione base della simulazione di un disegno a matita.</p>
+                    <span class="filename">matita.html</span>
+                </a>
+            </div>
+
+            <div class="link-card">
+                <a href="modulazione.html">
+                    <h3>Modulazione</h3>
+                    <p class="description">Esperimento basato sulla modulazione di parametri di un'immagine (es. spessore linea, frequenza).</p>
+                    <span class="filename">modulazione.html</span>
+                </a>
+            </div>
+
+            <div class="link-card">
+                <a href="mosaico adattativo 2.html">
+                    <h3>Mosaico Adattativo v2</h3>
+                    <p class="description">Effetto mosaico dove la dimensione delle tessere si adatta ai dettagli dell'immagine (v2).</p>
+                    <span class="filename">mosaico adattativo 2.html</span>
+                </a>
+            </div>
+
+            <div class="link-card">
+                <a href="mosaico adattativo con finitura 1.html">
+                    <h3>Mosaico Adattativo con Finitura</h3>
+                    <p class="description">Mosaico adattativo con un passaggio aggiuntivo di finitura per un risultato migliore.</p>
+                    <span class="filename">mosaico adattativo con finitura 1.html</span>
+                </a>
+            </div>
+
+            <div class="link-card">
+                <a href="mosaico svg adattativo 2.html">
+                    <h3>Mosaico SVG Adattativo v2</h3>
+                    <p class="description">Versione vettoriale SVG del mosaico adattativo.</p>
+                    <span class="filename">mosaico svg adattativo 2.html</span>
+                </a>
+            </div>
+
+            <div class="link-card">
+                <a href="mosaico svg ottimizzato 1.html">
+                    <h3>Mosaico SVG Ottimizzato</h3>
+                    <p class="description">Generatore di mosaici SVG con ottimizzazione del numero di elementi o del peso del file.</p>
+                    <span class="filename">mosaico svg ottimizzato 1.html</span>
+                </a>
+            </div>
+
+            <div class="link-card">
+                <a href="mosaico timbro 1.html">
+                    <h3>Mosaico a Timbro</h3>
+                    <p class="description">Creazione di un effetto mosaico utilizzando una forma "timbro" ripetuta.</p>
+                    <span class="filename">mosaico timbro 1.html</span>
+                </a>
+            </div>
+
+            <div class="link-card">
+                <a href="punta secca acquaforte.html">
+                    <h3>Punta Secca / Acquaforte</h3>
+                    <p class="description">Simulazione delle tecniche di incisione come la punta secca e l'acquaforte.</p>
+                    <span class="filename">punta secca acquaforte.html</span>
+                </a>
+            </div>
+
+            <div class="link-card">
+                <a href="pwm 2.html">
+                    <h3>PWM v2</h3>
+                    <p class="description">Seconda versione di un effetto basato sulla modulazione di larghezza di impulso (PWM).</p>
+                    <span class="filename">pwm 2.html</span>
+                </a>
+            </div>
+
+            <div class="link-card">
+                <a href="pwm bn.html">
+                    <h3>PWM in Bianco e Nero</h3>
+                    <p class="description">Applicazione della tecnica PWM per creare un'immagine in bianco e nero.</p>
+                    <span class="filename">pwm bn.html</span>
+                </a>
+            </div>
+
+            <div class="link-card">
+                <a href="quadtree 1.html">
+                    <h3>Quadtree v1</h3>
+                    <p class="description">Visualizzazione di una scomposizione di immagine tramite una struttura dati Quadtree.</p>
+                    <span class="filename">quadtree 1.html</span>
+                </a>
+            </div>
+
+            <div class="link-card">
+                <a href="quadtree to svg.html">
+                    <h3>Quadtree a SVG</h3>
+                    <p class="description">Conversione della struttura Quadtree di un'immagine in un file vettoriale SVG.</p>
+                    <span class="filename">quadtree to svg.html</span>
+                </a>
+            </div>
+
+            <div class="link-card">
+                <a href="README.md">
+                    <h3>Documentazione (README)</h3>
+                    <p class="description">File di testo con la documentazione e le note sul progetto.</p>
+                    <span class="filename">README.md</span>
+                </a>
+            </div>
+            
+            <div class="link-card">
+                <a href="sargent (con Palette Personalizzata).html">
+                    <h3>Stile Sargent (Palette Pers.)</h3>
+                    <p class="description">Replicazione dello stile di John Singer Sargent con una palette di colori personalizzata.</p>
+                    <span class="filename">sargent (con Palette Personalizzata).html</span>
+                </a>
+            </div>
+
+            <div class="link-card">
+                <a href="svg simplify 0.html">
+                    <h3>Semplificazione SVG</h3>
+                    <p class="description">Strumento per semplificare i tracciati di un file SVG, riducendone la complessità.</p>
+                    <span class="filename">svg simplify 0.html</span>
+                </a>
+            </div>
+
+            <div class="link-card">
+                <a href="svg to gcode ok.html">
+                    <h3>SVG a G-code</h3>
+                    <p class="description">Convertitore da formato SVG a G-code per macchine a controllo numerico (es. plotter, stampanti 3D).</p>
+                    <span class="filename">svg to gcode ok.html</span>
+                </a>
+            </div>
+
+            <div class="link-card">
+                <a href="svg to pdf jpg png.html">
+                    <h3>Convertitore SVG</h3>
+                    <p class="description">Tool per convertire file SVG in altri formati come PDF, JPG e PNG.</p>
+                    <span class="filename">svg to pdf jpg png.html</span>
+                </a>
+            </div>
+
+            <div class="link-card">
+                <a href="svg to rough OK.html">
+                    <h3>SVG a Stile "Rough"</h3>
+                    <p class="description">Trasforma un SVG pulito in uno con uno stile più grezzo, simile a uno schizzo (es. rough.js).</p>
+                    <span class="filename">svg to rough OK.html</span>
+                </a>
+            </div>
+
+            <div class="link-card">
+                <a href="tassello a svg quad.html">
+                    <h3>Tassello a SVG (Quad)</h3>
+                    <p class="description">Creazione di un SVG basato su una tassellatura di quadrilateri.</p>
+                    <span class="filename">tassello a svg quad.html</span>
+                </a>
+            </div>
+
+        </div>
+    </main>
+
+    <footer>
+        <p>© 2024 - Indice dei Progetti. Realizzato con HTML e CSS.</p>
+    </footer>
+
+</body>
 </html>
