@@ -109,13 +109,29 @@
             background: #eee;
             border: 1px solid #ccc;
         }
-        #saveButton {
-            display: none;
+        /* --- NUOVO CSS --- */
+        .save-buttons-container {
+            display: none; /* Inizialmente nascosto */
+            justify-content: center;
+            gap: 15px;
             margin-top: 20px;
+        }
+        #saveButton, #saveSvgButton {
+            width: auto;
+            flex-grow: 1;
+            max-width: 250px;
+        }
+        #saveButton {
             background-color: #34a853;
         }
         #saveButton:hover {
             background-color: #2b8c45;
+        }
+        #saveSvgButton {
+            background-color: #ff6f00; /* Un colore diverso per l'SVG */
+        }
+        #saveSvgButton:hover {
+            background-color: #e66400;
         }
         .slider-value {
             font-weight: bold;
@@ -156,7 +172,12 @@
         <p id="quadCountInfo"></p>
 
         <canvas id="outputCanvas"></canvas>
-        <button id="saveButton">Salva Immagine</button>
+        
+        <!-- NUOVO: Contenitore per i pulsanti di salvataggio -->
+        <div class="save-buttons-container" id="saveButtonsContainer">
+            <button id="saveButton">Salva come PNG</button>
+            <button id="saveSvgButton">Salva come SVG</button>
+        </div>
     </div>
 
     <script>
@@ -166,6 +187,10 @@
     const saveButton = document.getElementById('saveButton');
     const outputCanvas = document.getElementById('outputCanvas');
     const ctx = outputCanvas.getContext('2d');
+    
+    // --- NUOVI ELEMENTI DOM ---
+    const saveSvgButton = document.getElementById('saveSvgButton');
+    const saveButtonsContainer = document.getElementById('saveButtonsContainer');
     
     const paletteSizeSlider = document.getElementById('paletteSize');
     const varianceSlider = document.getElementById('varianceThreshold');
@@ -183,9 +208,11 @@
     let totalPixelsToProcess = 0;
     let pixelsProcessed = 0;
     let quadCount = 0;
+    // --- NUOVO STATO PER L'SVG ---
+    let svgRects = []; // Array per contenere gli elementi <rect> dell'SVG
 
     // --- PARAMETRI ALGORITMO ---
-    const MAX_DEPTH = 10; // Aumentabile leggermente grazie all'ottimizzazione
+    const MAX_DEPTH = 10;
     let PALETTE_SIZE = parseInt(paletteSizeSlider.value);
     let VARIANCE_THRESHOLD = parseInt(varianceSlider.value);
     let MIN_SIZE = parseInt(minSizeSlider.value);
@@ -204,7 +231,7 @@
                     outputCanvas.width = Math.min(sourceImage.width, maxWidth);
                     outputCanvas.height = outputCanvas.width / aspectRatio;
                     ctx.drawImage(sourceImage, 0, 0, outputCanvas.width, outputCanvas.height);
-                    saveButton.style.display = 'none';
+                    saveButtonsContainer.style.display = 'none'; // Nasconde il contenitore
                     progressContainer.style.display = 'none';
                     quadCountInfo.style.display = 'none';
                 };
@@ -218,11 +245,38 @@
     varianceSlider.addEventListener('input', (e) => { VARIANCE_THRESHOLD = parseInt(e.target.value); varianceValueSpan.textContent = VARIANCE_THRESHOLD; });
     minSizeSlider.addEventListener('input', (e) => { MIN_SIZE = parseInt(e.target.value); minSizeValueSpan.textContent = MIN_SIZE; });
     startButton.addEventListener('click', () => { if (sourceImage) processImage(); });
+    
+    // Listener per il salvataggio PNG
     saveButton.addEventListener('click', () => {
         const link = document.createElement('a');
         link.download = 'quadtree-painting.png';
         link.href = outputCanvas.toDataURL('image/png');
         link.click();
+    });
+
+    // --- NUOVO: Listener per il salvataggio SVG ---
+    saveSvgButton.addEventListener('click', () => {
+        // Costruisce la stringa SVG finale
+        const svgString = `<svg width="${outputCanvas.width}" height="${outputCanvas.height}" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges">
+    ${svgRects.join('\n    ')}
+</svg>`;
+
+        // Crea un Blob (Binary Large Object)
+        const blob = new Blob([svgString], { type: 'image/svg+xml' });
+        
+        // Crea un URL per il Blob
+        const url = URL.createObjectURL(blob);
+        
+        // Simula il click su un link per avviare il download
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = 'quadtree-painting.svg';
+        document.body.appendChild(link);
+        link.click();
+        
+        // Pulisce
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
     });
 
     // --- FUNZIONI HELPER PER COLORI E PALETTE ---
@@ -287,12 +341,12 @@
             quantizedData.data[i]     = closest.r;
             quantizedData.data[i + 1] = closest.g;
             quantizedData.data[i + 2] = closest.b;
-            quantizedData.data[i + 3] = 255; // Alpha
+            quantizedData.data[i + 3] = 255;
         }
         return quantizedData;
     }
 
-    // --- ALGORITMO QUADTREE (ORA SU DATI QUANTIZZATI) ---
+    // --- ALGORITMO QUADTREE ---
     function analyzeRegion(imageData, x, y, width, height) {
         let sumR = 0, sumG = 0, sumB = 0, count = 0;
         const firstPixelIndex = (y * imageData.width + x) * 4;
@@ -315,12 +369,10 @@
         
         const averageColor = { r: sumR / count, g: sumG / count, b: sumB / count };
         
-        // Ottimizzazione: se la regione è già di un colore solido, la varianza è 0.
         if (isSolidColor) {
             return { average: averageColor, variance: 0 };
         }
 
-        // Calcola la varianza solo se necessario
         let variance = 0;
         for (let j = y; j < y + height; j++) {
             for (let i = x; i < x + width; i++) {
@@ -333,21 +385,19 @@
     }
 
     async function paintQuadtree(quantizedData, palette, x, y, width, height, depth) {
-        // I criteri di arresto (dimensione, profondità) rimangono
         if (width < MIN_SIZE || height < MIN_SIZE || depth > MAX_DEPTH) {
             const region = analyzeRegion(quantizedData, x, y, width, height);
             const bestColor = findClosestColor(region.average, palette);
-            drawAndCountRect(x, y, width, height, bestColor);
+            drawAndCountRect(x, y, width, height, bestColor); // MODIFICATO
             updateProgress(width * height);
             return;
         }
 
         const region = analyzeRegion(quantizedData, x, y, width, height);
         
-        // Criterio di suddivisione (varianza)
         if (region.variance < VARIANCE_THRESHOLD) {
             const bestColor = findClosestColor(region.average, palette);
-            drawAndCountRect(x, y, width, height, bestColor);
+            drawAndCountRect(x, y, width, height, bestColor); // MODIFICATO
             updateProgress(width * height);
         } else {
             const halfW = Math.ceil(width / 2);
@@ -362,9 +412,20 @@
         }
     }
     
+    // --- NUOVO: Funzione modificata per disegnare su Canvas E generare l'SVG ---
     function drawAndCountRect(x, y, width, height, color) {
-        ctx.fillStyle = `rgb(${Math.round(color.r)}, ${Math.round(color.g)}, ${Math.round(color.b)})`;
+        const r = Math.round(color.r);
+        const g = Math.round(color.g);
+        const b = Math.round(color.b);
+        const fillColor = `rgb(${r}, ${g}, ${b})`;
+
+        // 1. Disegna su Canvas (comportamento precedente)
+        ctx.fillStyle = fillColor;
         ctx.fillRect(x, y, width, height);
+        
+        // 2. Aggiunge l'elemento <rect> all'array per l'SVG
+        svgRects.push(`<rect x="${x}" y="${y}" width="${width}" height="${height}" fill="${fillColor}" />`);
+
         quadCount++;
     }
 
@@ -378,7 +439,7 @@
     // --- FLUSSO PRINCIPALE DEL PROCESSO ---
     async function processImage() {
         startButton.disabled = true;
-        saveButton.style.display = 'none';
+        saveButtonsContainer.style.display = 'none'; // Nasconde il contenitore
         progressContainer.style.display = 'block';
         quadCountInfo.style.display = 'none';
         
@@ -398,18 +459,19 @@
         totalPixelsToProcess = sourceData.width * sourceData.height;
         pixelsProcessed = 0;
         quadCount = 0;
+        svgRects = []; // NUOVO: Azzera l'array dei rettangoli SVG
         
         // 1. Creazione Palette dall'immagine originale
         progressBar.textContent = 'Creazione palette (k-means)...';
         await new Promise(resolve => setTimeout(resolve, 50));
         const palette = await createPaletteFromImage(sourceData, PALETTE_SIZE);
         
-        // 2. Quantizzazione Immagine (NUOVO PASSO DI OTTIMIZZAZIONE)
+        // 2. Quantizzazione Immagine
         progressBar.textContent = 'Quantizzazione immagine...';
         await new Promise(resolve => setTimeout(resolve, 50));
         const quantizedData = await quantizeImageData(sourceData, palette);
 
-        // 3. Esecuzione Quadtree sull'immagine quantizzata
+        // 3. Esecuzione Quadtree
         ctx.clearRect(0, 0, outputCanvas.width, outputCanvas.height);
         progressBar.style.width = '0%';
         progressBar.textContent = 'Rendering Quadtree...';
@@ -423,7 +485,7 @@
         quadCountInfo.innerHTML = `🎨 Immagine generata con <strong>${quadCount.toLocaleString('it-IT')}</strong> rettangoli e <strong>${palette.length}</strong> ${colorText}.`;
         quadCountInfo.style.display = 'block';
         startButton.disabled = false;
-        saveButton.style.display = 'block';
+        saveButtonsContainer.style.display = 'flex'; // Mostra il contenitore con entrambi i pulsanti
     }
     </script>
 </body>
